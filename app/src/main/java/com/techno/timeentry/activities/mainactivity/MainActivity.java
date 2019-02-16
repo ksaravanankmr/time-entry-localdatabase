@@ -1,7 +1,9 @@
 package com.techno.timeentry.activities.mainactivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
@@ -53,8 +55,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @OnClick(R.id.ib_delete)
     void deleteTimeEntry() {
-        presenter.onDeleteClicked();
-        rlTimeEntryDetails.setVisibility(View.GONE);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DialogTheme);
+        builder.setTitle(getString(R.string.text_alert_delete_title))
+                .setMessage(getString(R.string.text_alert_delete_message))
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.onDeleteClicked();
+                        rlTimeEntryDetails.setVisibility(View.GONE);
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(R.drawable.ic_warning_black_24dp)
+                .show();
     }
 
     @OnClick(R.id.ib_edit)
@@ -76,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void showTimeEntryDetails(TimeEntry timeEntry) {
-        tvDateInfo.setText(Utils.getFormattedDateTime(timeEntry.getTimeIn(), "EEE," + Utils.DATE_FORMAT));
+        tvDateInfo.setText(Utils.getFormattedDateTime(timeEntry.getDate(), "EEE," + Utils.DATE_FORMAT));
         tvInTimeInfo.setText(getString(R.string.text_in_time_label) + Utils.getFormattedDateTime(timeEntry.getTimeIn(), Utils.TIME_FORMAT));
         tvOutInfo.setText(getString(R.string.text_out_time_label) + Utils.getFormattedDateTime(timeEntry.getTimeOut(), Utils.TIME_FORMAT));
         tvNoteInfo.setText(getString(R.string.text_note_label) + " : " + timeEntry.getNote());

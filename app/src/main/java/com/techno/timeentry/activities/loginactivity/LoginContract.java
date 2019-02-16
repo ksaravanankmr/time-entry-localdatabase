@@ -6,6 +6,8 @@ public interface LoginContract {
 
     interface Presenter {
         void login(String userName, String passWord);
+
+        void cancelLogin();
     }
 
     interface View {

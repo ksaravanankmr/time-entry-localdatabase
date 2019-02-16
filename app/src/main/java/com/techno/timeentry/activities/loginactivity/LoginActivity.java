@@ -1,6 +1,7 @@
 package com.techno.timeentry.activities.loginactivity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +72,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage(getString(R.string.text_authenticating));
         progressDialog.show();
+        progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                loginPresenter.cancelLogin();
+            }
+        });
         return progressDialog;
     }
 

@@ -9,8 +9,13 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View view;
 
+    Handler handler;
+    private String userName = "dummyuser";
+    private String passWord = "dummypass";
+
     LoginPresenter(LoginContract.View view) {
         this.view = view;
+        handler = new Handler();
     }
 
     @Override
@@ -24,7 +29,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
         view.disableLoginButton();
         final ProgressDialog progressDialog = view.showProgressDialog();
-        new Handler().postDelayed(
+        handler.postDelayed(
                 new Runnable() {
                     public void run() {
                         if (authenticateUser(userName, passWord)) {
@@ -37,6 +42,11 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     }
                 }, 2000);
+    }
+
+    @Override
+    public void cancelLogin() {
+        handler.removeCallbacksAndMessages(null);
     }
 
     private boolean validate(String userName, String passWord) {
@@ -58,9 +68,9 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     private boolean authenticateUser(String userName, String passWord) {
-        if (!userName.equals("dummyuser")) {
+        if (!this.userName.equals(userName)) {
             view.showUserNameNotRegistered();
-        } else if (!passWord.equals("dummypass")) {
+        } else if (!this.passWord.equals(passWord)) {
             view.showPassWordIncorrect();
         } else {
             return true;

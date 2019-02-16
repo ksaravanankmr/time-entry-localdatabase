@@ -1,6 +1,7 @@
 package com.techno.timeentry.activities.timeentryformactivity;
 
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
@@ -8,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.techno.timeentry.R;
+import com.techno.timeentry.activities.mainactivity.MainActivity;
 import com.techno.timeentry.models.TimeEntry;
 import com.techno.timeentry.utils.Utils;
 
@@ -94,9 +97,16 @@ public class TimeEntryFormActivity extends AppCompatActivity implements TimeEntr
 
     @OnClick(R.id.btn_save)
     void saveOrUpdateTimeEntry() {
-        TimeEntry entry = new TimeEntry(dateInMillSecs, inTimeInMillSecs, outTimeInMillSecs, etNote.getText().toString());
-        presenter.saveTimeEntryToDataBase(entry, timeEntryActivityMode);
-        finish();
+        if (inTimeInMillSecs <= 0) {
+            Toast.makeText(this, getString(R.string.text_alert_in_time), Toast.LENGTH_SHORT).show();
+        } else {
+            TimeEntry entry = new TimeEntry(dateInMillSecs, inTimeInMillSecs, outTimeInMillSecs, etNote.getText().toString());
+            presenter.saveTimeEntryToDataBase(entry, timeEntryActivityMode);
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
