@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/margin_horizontal"
+    android:paddingTop="56dp"
+    android:paddingRight="@dimen/margin_horizontal"
+    tools:context="com.techno.timeentry.activities.timeentryformactivity.TimeEntryFormActivity">
+
+    <TextView
+        android:id="@+id/tv_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/double_space"
+        android:hint="@string/text_date_label"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/currentMonthDayColor" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/double_space"
+        android:layout_toEndOf="@+id/tv_date_label"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/currentMonthDayColor" />
+
+    <TextView
+        android:id="@+id/tv_in_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_date_label"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/double_space"
+        android:hint="@string/text_in_time_label"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/currentMonthDayColor" />
+
+    <TextView
+        android:id="@+id/tv_in_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_date_label"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/double_space"
+        android:layout_toEndOf="@+id/tv_in_time_label"
+        android:text=" 00 : 00 "
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/tv_out_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_in_time_label"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/double_space"
+        android:hint="@string/text_out_time_label"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/currentMonthDayColor" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_out_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_in_time_label"
+        android:layout_marginTop="@dimen/double_space"
+        android:layout_marginBottom="@dimen/double_space"
+        android:layout_toEndOf="@+id/tv_out_time_label"
+        android:focusable="true"
+        android:text=" 00 : 00 "
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorAccent" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/tip_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_out_time_label"
+        android:layout_marginTop="@dimen/full_space"
+        android:layout_marginBottom="@dimen/full_space">
+
+        <EditText
+            android:id="@+id/et_note"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/text_note_label"
+            android:singleLine="true" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tip_note"
+        android:layout_marginTop="@dimen/margin_horizontal"
+        android:layout_marginBottom="@dimen/margin_horizontal"
+        android:padding="12dp"
+        android:text="@string/text_save" />
+</RelativeLayout>

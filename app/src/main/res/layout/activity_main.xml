@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.techno.timeentry.activities.mainactivity.MainActivity">
+
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_time_entry_details"
+        app:eventsEnabled="true"
+        app:headerColor="@color/colorPrimary"
+        app:selectionColor="@color/colorPrimary"
+        app:todayLabelColor="@color/colorPrimary"
+        app:type="one_day_picker" />
+
+    <RelativeLayout
+        android:id="@+id/rl_time_entry_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/full_space"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_date_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/full_space"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/tv_in_time_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_date_info"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/full_space" />
+
+        <TextView
+            android:id="@+id/tv_out_time_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_in_time_info"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/full_space" />
+
+        <TextView
+            android:id="@+id/tv_note_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_out_time_info"
+            android:layout_alignParentStart="true"
+            android:layout_margin="@dimen/full_space" />
+
+        <ImageButton
+            android:id="@+id/ib_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/full_space"
+            android:background="@null"
+            android:src="@drawable/ic_delete_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/ib_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/full_space"
+            android:layout_toStartOf="@+id/ib_delete"
+            android:background="@null"
+            android:src="@drawable/ic_edit_black_24dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

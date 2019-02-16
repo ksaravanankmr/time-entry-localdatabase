@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="quarter_space">2dp</dimen>
+    <dimen name="half_space">4dp</dimen>
+    <dimen name="full_space">8dp</dimen>
+    <dimen name="double_space">16dp</dimen>
+    <dimen name="quadruple_space">32dp</dimen>
+    <dimen name="margin_horizontal">24dp</dimen>
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Time Entry</string>
+    <string name="text_enter_details">Enter details</string>
+    <string name="text_login_failed">Login failed</string>
+    <string name="text_authenticating">Authenticating &#8230;</string>
+
+    <string name="text_valid_user_name">Enter a valid user name</string>
+    <string name="text_password_error_message">Between 4 and 10 alphanumeric characters</string>
+    <string name="text_username_not_registered">Username is not registered</string>
+    <string name="text_incorrect_password">Incorrect password</string>
+
+    <string name="text_in_time_label">Time In : </string>
+    <string name="text_out_time_label">Time Out : </string>
+    <string name="text_date_label">Date : </string>
+
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
+    <string name="text_login">Login</string>
+    <string name="text_save">Save</string>
+    <string name="text_note_label">Note</string>
+    <string name="text_update">Update</string>
+</resources>
