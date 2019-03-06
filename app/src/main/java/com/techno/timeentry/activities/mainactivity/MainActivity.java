@@ -92,4 +92,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         intent.putExtra("date", recyclerPresenter.selectedDate.getCalendar().getTimeInMillis());
         startActivity(intent);
     }
+
+    @Override
+    public void setTodayEvent(EventDay eventDay) {
+        recyclerPresenter.selectedDate = eventDay;
+    }
 }

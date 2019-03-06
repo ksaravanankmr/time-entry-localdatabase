@@ -57,14 +57,17 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
                     EventDay eventDay = new EventDay(cal, R.drawable.baseline_notes_24);
                     events.add(eventDay);
 
-                    if (checkTodayTimeEntries(entry))
+                    if (checkTodayTimeEntries(entry)) {
+                        view.setTodayEvent(eventDay);
                         isTimeEntryAvailableForToday = true;
+                    }
 
                 }
 
                 view.setEventsOnCalendarView(events);
-                if (isTimeEntryAvailableForToday)
+                if (isTimeEntryAvailableForToday) {
                     loadTimeEntriesFromDatabaseForDate(view, getTodayDateInMilliSecs());
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();

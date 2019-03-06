@@ -19,5 +19,7 @@ public interface MainActivityContract {
 
         void loadTimeEntryFormActivity(EventDay eventDay);
 
+        void setTodayEvent(EventDay eventDay);
+
     }
 }
