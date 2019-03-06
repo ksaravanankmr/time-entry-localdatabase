@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void showPassWordIncorrect() {
-        etUsername.setError(getString(R.string.text_incorrect_password));
+        etPass.setError(getString(R.string.text_incorrect_password));
     }
 
     @Override
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void clearPassWordError() {
-        etUsername.setError(null);
+        etPass.setError(null);
     }
 }
 

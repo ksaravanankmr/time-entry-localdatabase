@@ -9,16 +9,15 @@ public interface MainActivityContract {
 
     interface Presenter {
         void onDateClicked(EventDay eventDay);
-
-        void onDeleteClicked();
     }
 
     interface View {
 
         void setEventsOnCalendarView(List<EventDay> events);
 
-        void showTimeEntryDetails(TimeEntry timeEntry);
+        void showTimeEntryDetails(List<TimeEntry> timeEntries);
 
         void loadTimeEntryFormActivity(EventDay eventDay);
+
     }
 }

@@ -6,10 +6,10 @@ public interface TimeEntryFormActivityContract {
     interface Presenter {
         void saveTimeEntryToDataBase(TimeEntry timeEntry, int mode);
 
-        void getTimeEntryFromDataBase(long date);
+        void getTimeEntryFromDataBase(int id);
     }
 
     interface View {
-        void showTimeEntryDetails(TimeEntry timeEntry);
+        void showDetailsOfTimeEntryFromDataBase(TimeEntry timeEntry);
     }
 }

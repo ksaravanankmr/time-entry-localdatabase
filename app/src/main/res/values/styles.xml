@@ -14,9 +14,7 @@
         <item name="android:buttonStyle">@style/ButtonColor</item>
     </style>
 
-    <style name="DialogTheme" parent="ThemeOverlay.AppCompat.Dialog">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 

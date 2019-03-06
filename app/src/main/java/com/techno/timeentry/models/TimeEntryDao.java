@@ -15,10 +15,13 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 public interface TimeEntryDao {
 
     @Query("SELECT * FROM time_entry")
-    LiveData<List<TimeEntry>> getAll();
+    LiveData<List<TimeEntry>> getAllEntries();
 
-    @Query("SELECT * FROM time_entry where date LIKE  :date")
-    LiveData<TimeEntry> findByDate(long date);
+    @Query("SELECT * FROM time_entry where date LIKE :date")
+    LiveData<List<TimeEntry>> getAllEntriesFordDate(long date);
+
+    @Query("SELECT * FROM time_entry where id LIKE  :id")
+    LiveData<TimeEntry> findEntryById(int id);
 
     @Query("SELECT COUNT(*) from time_entry")
     int countTimeEntries();

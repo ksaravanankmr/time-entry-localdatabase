@@ -28,6 +28,8 @@ public class TimeEntryFormActivityPresenter implements TimeEntryFormActivityCont
             public void run() {
                 if (mode == Utils.MODE_UPDATE) {
                     timeEntryDataBase.timeEntryDao().updateTimeEntries(timeEntry);
+                } else if (mode == Utils.MODE_ADD) {
+                    timeEntryDataBase.timeEntryDao().insertTimeEntries(timeEntry);
                 } else {
                     timeEntryDataBase.timeEntryDao().insertTimeEntries(timeEntry);
                 }
@@ -36,9 +38,9 @@ public class TimeEntryFormActivityPresenter implements TimeEntryFormActivityCont
     }
 
     @Override
-    public void getTimeEntryFromDataBase(long dateInMilliSecs) {
-        timeEntryDataBase.timeEntryDao().findByDate(dateInMilliSecs).observe(lifecycleOwner, timeEntry -> {
-            view.showTimeEntryDetails(timeEntry);
+    public void getTimeEntryFromDataBase(int id) {
+        timeEntryDataBase.timeEntryDao().findEntryById(id).observe(lifecycleOwner, timeEntry -> {
+            view.showDetailsOfTimeEntryFromDataBase(timeEntry);
         });
     }
 }

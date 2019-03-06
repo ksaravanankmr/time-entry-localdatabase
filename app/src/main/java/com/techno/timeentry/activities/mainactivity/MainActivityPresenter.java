@@ -1,7 +1,6 @@
 package com.techno.timeentry.activities.mainactivity;
 
 import android.arch.lifecycle.LifecycleOwner;
-import android.os.AsyncTask;
 
 import com.applandeo.materialcalendarview.EventDay;
 import com.techno.timeentry.R;
@@ -10,18 +9,16 @@ import com.techno.timeentry.models.TimeEntry;
 import com.techno.timeentry.models.TimeEntryDataBase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
 public class MainActivityPresenter implements MainActivityContract.Presenter {
 
-    private MainActivityContract.View view;
+    private MainActivity view;
 
-    TimeEntryDataBase timeEntryDataBase;
-    List<TimeEntry> timEntries;
-    List<EventDay> events;
-
-    EventDay selectedDate;
+    private TimeEntryDataBase timeEntryDataBase;
+    private List<EventDay> events;
 
     MainActivityPresenter(MainActivity view) {
         this.view = view;
@@ -32,42 +29,43 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     @Override
     public void onDateClicked(EventDay eventDay) {
-        selectedDate = eventDay;
 
         if (events.contains(eventDay)) {
-            TimeEntry timeEntry = getTimeEntryFromEventDay(eventDay);
-            view.showTimeEntryDetails(timeEntry);
+            loadTimeEntriesFromDatabaseForDate(view, eventDay.getCalendar().getTimeInMillis());
         } else {
             view.loadTimeEntryFormActivity(eventDay);
         }
     }
 
-    @Override
-    public void onDeleteClicked() {
-        TimeEntry timeEntry = getTimeEntryFromEventDay(selectedDate);
+    private void loadTimeEntriesFromDatabaseForDate(LifecycleOwner lifeCycleOwner, long dateInMilliSecs) {
+        timeEntryDataBase.timeEntryDao().getAllEntriesFordDate(dateInMilliSecs).observe(lifeCycleOwner, timeEntries -> {
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                timeEntryDataBase.timeEntryDao().delete(timeEntry);
-            }
+            view.showTimeEntryDetails(timeEntries);
+
         });
+
     }
 
     private void loadTimeEntriesFromDatabase(LifecycleOwner lifeCycleOwner) {
-        timeEntryDataBase.timeEntryDao().getAll().observe(lifeCycleOwner, timeEntries -> {
+        timeEntryDataBase.timeEntryDao().getAllEntries().observe(lifeCycleOwner, timeEntries -> {
             events = new ArrayList<>();
-            timEntries = timeEntries;
             try {
-
+                boolean isTimeEntryAvailableForToday = false;
                 for (TimeEntry entry : timeEntries) {
                     Calendar cal = Calendar.getInstance();
-
                     cal.setTimeInMillis(entry.getDate());
-                    events.add(new EventDay(cal, R.drawable.baseline_notes_24));
+                    EventDay eventDay = new EventDay(cal, R.drawable.baseline_notes_24);
+                    events.add(eventDay);
+
+                    if (checkTodayTimeEntries(entry))
+                        isTimeEntryAvailableForToday = true;
+
                 }
 
                 view.setEventsOnCalendarView(events);
+                if (isTimeEntryAvailableForToday)
+                    loadTimeEntriesFromDatabaseForDate(view, getTodayDateInMilliSecs());
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -75,9 +73,19 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     }
 
-    private TimeEntry getTimeEntryFromEventDay(EventDay eventDay) {
-        int elementIndex = events.indexOf(eventDay);
-        return timEntries.get(elementIndex);
+    private boolean checkTodayTimeEntries(TimeEntry timeEntry) {
+        return timeEntry.getDate() == getTodayDateInMilliSecs();
+    }
+
+    private long getTodayDateInMilliSecs() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+        return calendar.getTimeInMillis();
+
     }
 
 }

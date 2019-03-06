@@ -7,20 +7,34 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "time_entry")
 public class TimeEntry {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+    @ColumnInfo(name = "date")
     private long date;
     @ColumnInfo(name = "time_in")
     private long timeIn;
     @ColumnInfo(name = "time_out")
     private long timeOut;
+    @ColumnInfo(name = "topic")
+    private String topic;
     @ColumnInfo(name = "note")
     private String note;
 
-    public TimeEntry(long date, long timeIn, long timeOut, String note) {
+    public TimeEntry(int id, long date, long timeIn, long timeOut, String topic, String note) {
+        this.id = id;
         this.date = date;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
+        this.topic = topic;
         this.note = note;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public long getDate() {
@@ -45,6 +59,14 @@ public class TimeEntry {
 
     public void setTimeOut(long timeOut) {
         this.timeOut = timeOut;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getNote() {

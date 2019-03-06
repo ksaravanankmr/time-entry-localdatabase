@@ -12,10 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rl_time_entry_details"
+        android:layout_alignParentTop="true"
         app:eventsEnabled="true"
         app:headerColor="@color/colorPrimary"
-        app:selectionColor="@color/colorPrimary"
-        app:todayLabelColor="@color/colorPrimary"
+        app:selectionColor="@color/colorAccent"
+        app:todayLabelColor="@color/colorAccent"
         app:type="one_day_picker" />
 
     <RelativeLayout
@@ -26,57 +27,37 @@
         android:layout_margin="@dimen/full_space"
         android:visibility="gone">
 
-        <TextView
-            android:id="@+id/tv_date_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/full_space"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        <RelativeLayout
+            android:id="@+id/rl_header_time_entries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_in_time_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_date_info"
-            android:layout_alignParentStart="true"
-            android:layout_margin="@dimen/full_space" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_margin="@dimen/full_space"
+                android:text="@string/text_header_time_entries"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-        <TextView
-            android:id="@+id/tv_out_time_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_in_time_info"
-            android:layout_alignParentStart="true"
-            android:layout_margin="@dimen/full_space" />
+            <ImageButton
+                android:id="@+id/ib_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="@dimen/full_space"
+                android:background="@null"
+                android:src="@drawable/ic_add_circle_outline_black_24dp" />
 
-        <TextView
-            android:id="@+id/tv_note_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_out_time_info"
-            android:layout_alignParentStart="true"
-            android:layout_margin="@dimen/full_space" />
+        </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/ib_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/full_space"
-            android:background="@null"
-            android:src="@drawable/ic_delete_black_24dp" />
-
-        <ImageButton
-            android:id="@+id/ib_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/full_space"
-            android:layout_toStartOf="@+id/ib_delete"
-            android:background="@null"
-            android:src="@drawable/ic_edit_black_24dp" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_time_entries"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/rl_header_time_entries"/>
 
     </RelativeLayout>
 
